@@ -22,14 +22,25 @@ while True :
         conn , addr = server_socket.accept()
 
         client_ip = addr[0] #find client ip address and save it into a variable
-
+        print("")
+        print("------------------")
+        print("something recieved")
+        print("------------------")
+        print("")
         #checks if client's  IP saved or not
         if client_ip :
             conn.send(ACK.encode())
 
-            with open("ips" , 'a+') as file:
-                file.write(client_ip)
-                file.write("\n")
+            with open("ips" , 'r') as file:
+                contents = file.readlines()
+                if client_ip+"\n" not in contents : 
+                    with open("ips",'a') as appendfile :
+                        appendfile.write(client_ip)
+                        appendfile.write("\n")
+                else :
+                    print("IP already exist!")
+                    print("Update performed")
+
 
 
 
@@ -39,4 +50,3 @@ while True :
     #server_socket.shutdown(socket.SHUT_RD)    
     server_socket.close()
     server_socket = None
-    print("something recieved")
