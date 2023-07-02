@@ -19,11 +19,6 @@ with socket.socket() as client_socket :
         #checks for 'took' in acknowlege
         if ACK.lower().strip() == "took":
             print("Server Now Knows me !")
-
-        elif ACK.lower().lower() == "failed" :
-            print("faild")
-        elif ACK.strip() == "FS":
-            print("secret does not match")
     except :
         print("server is down or something else is wrong")
 
